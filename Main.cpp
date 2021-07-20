@@ -1,4 +1,8 @@
+#include "Cards.h"
+
 int main() {
+
+	Cards newgame;
 
 
 

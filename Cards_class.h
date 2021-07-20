@@ -10,6 +10,7 @@ public:
 	void instructions();
 	void playGame();
 	void AddCard();
+	void Menu();
 	
 
 private:
