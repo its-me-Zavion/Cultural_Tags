@@ -11,7 +11,8 @@ public:
 	void playGame();
 	void AddCard();
 	void Menu();
-	
+	void update_dictionary(std::string);
+
 
 private:
 	std::map<std::string, std::string> Card_map;
