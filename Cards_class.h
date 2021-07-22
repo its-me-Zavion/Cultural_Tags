@@ -12,6 +12,8 @@ public:
 	void AddCard();
 	void Menu();
 	void update_dictionary(std::string);
+	void add_to_dictionary(std::string, std::string);
+	bool verify_input(std::string);
 
 
 private:

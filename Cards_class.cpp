@@ -30,9 +30,34 @@ void Cards::playGame()
 
 void Cards::AddCard()
 {
+	std::string outputfile = " Cultural_tags_dictionary.txt";
+
+	std::string user_input = "";
+	std::string results = "";
+
+	while (user_input == "") {
+		std::cout << "Insert a new Question-> ";
+		std::getline(std::cin, user_input);
+		while (!verify_input(user_input)) {
+			user_input = "";
+		}
+
+	}
+	results += user_input;
+	results += ", ";
+	user_input = "";
+	while (user_input == "") {
+		std::cout << "Insert a new Answer-> ";
+		std::getline(std::cin, user_input);
+		while (!verify_input(user_input)) {
+			user_input = "";
+		}
+	}
+	results += user_input;
+
+
 	//implement write function
-
-
+	add_to_dictionary(outputfile, results);
 	Menu();
 }
 
@@ -97,4 +122,33 @@ void Cards::update_dictionary(std::string inputfile)
 	print_map(Card_map);
 
 
+}
+
+void Cards::add_to_dictionary(std::string outputfile, std::string input)
+{
+	std::ofstream foutput;
+	foutput.open(outputfile, std::ios::app);
+	foutput << std::endl << input;
+	foutput.close();
+}
+
+bool Cards::verify_input(std::string input)
+{
+	std::string user_input = "";
+	while (user_input == "") {
+		std::cout << "Are you sure this is the correct input: '" << input << "'\n";
+		std::cout << "-> ";
+		std::getline(std::cin, user_input);
+
+		if (user_input == "yes") {
+			return true;
+		}
+		else if (user_input == "no") {
+			return false;
+		}
+		else {
+			std::cout << "specify 'yes' or 'no'\n";
+			user_input = "";
+		};
+	}
 }
