@@ -1,15 +1,11 @@
-this is question 1, a1
-q2, a2
-q3, a3
-q11, a11
-q22, a22
-q33, a33
-q111, a111
-q222, a222
-q333, a333
-q1111, a1111
-q2222, a2222
-q3333, a3333
-q11111, a11111
-q22222, a22222
-q33333, a33333
+OutOfSightOutOfMind,OOSOOM
+StopAllThatCryingBeforeIGiveYouSomethingToCryAbout,SATCBIGYSTCA
+IBroughtYouInThisWorldAndICanTakeYouOut,IBYITWAICTYO
+ThisIsAnAAndBConvoSoSeeYoureWayOut,TIAAABCSSYWO
+DontCountYourChickensBeforeTheyHatch,DNCYCBTAH
+TheBiggerTheyAreTheHarderTheyFall,TBTATHTF
+AnotherdayAnotherDollar,ADAD
+PutYourMoneyWhereYourMouthIs,PYMWYMI
+GreatMindsThinkAlike,GMTA
+BetterSafeThanSorry,BSTS
+BetterLateThanNever,BLTN
