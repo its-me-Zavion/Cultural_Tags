@@ -1,4 +1,5 @@
-#include "Cards.h"
+#include "Cards_class.h"
+#include <cctype>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -13,6 +14,7 @@ void print_map(std::map<K, V> const& m)
 
 Cards::Cards()
 {
+    update_dictionary("Cultural_tags_dictionary.txt");
 	Menu();
 }
 
@@ -21,22 +23,61 @@ void Cards::instructions()
 	std::cout << "-The objective of this game is to guess what the #CultureTag (acronym) stands for." << std::endl;
 	std::cout << "\nWhen you select \"2) Play Game\" the game will start as follows:" << std::endl;
 	std::cout << "   1. The program will you ask for the number of players. Enter how many players." << std::endl;
-    	std::cout << "   2. The program will then prompt you to enter names for each player." << std::endl;
-    	std::cout << "   3. The game will start by giving a card to the first player and taking their answer." << std::endl;
-    	std::cout << "   4. The player will be rewarded 3 points for a correct answer." << std::endl;
-    	std::cout << "   5. For incorrect answers, the player will lose one point and be able to try again." << std::endl;
-    	std::cout << "   6. The leaderboard will be shown after answer is confirmed, and the game will move"
+    std::cout << "   2. The program will then prompt you to enter names for each player." << std::endl;
+    std::cout << "   3. The game will start by giving a card to the first player and taking their answer." << std::endl;
+    std::cout << "   4. The player will be rewarded 3 points for a correct answer." << std::endl;
+    std::cout << "   5. For incorrect answers, the player will lose one point and be able to try again." << std::endl;
+    std::cout << "   6. The leaderboard will be shown after answer is confirmed, and the game will move"
               << "\n\ton to the next player and next question." << std::endl;
-    	std::cout << "   7. After everyone has had a turn, the game will show the current leader and ask if" 
+    std::cout << "   7. After everyone has had a turn, the game will show the current leader and ask if" 
               << "\n\tthe players want another round." << std::endl;
-    	std::cout << "   8. If players decline to play another round, the game will display the leader has won the game.\n" << std::endl;
+    std::cout << "   8. If players decline to play another round, the game will display the leader has won the game.\n" << std::endl;
 Menu();
 }
 
 void Cards::playGame()
 {
-	update_dictionary("Cultural_tags_dictionary.txt");
+	addPlayers();
+	
+	int random;
+    int points =3;
+    std::string answer;
+	bool rounds = true;
+	//map iterator and game loop
+    std::map<std::string,std::string>::iterator it=Card_map.begin();
+	while(rounds){
 
+        for(int i =0; i < players.size(); i++){
+        
+        // get players card
+            std:: cout <<players[i].name << "'s Card: ";
+            std::cout << it->second << std::endl;
+        
+        // Get Answer and points
+            while(points > 0)   {
+                std::cout << "Enter Answer: ";
+                std::cin >> answer;
+            
+        //Set answer and points
+                if(answer == it->first){
+                    std::cout << "CorrectAnswer!" << std::endl;
+                    players[i].score += points;
+                    std::cout << "Your Score: "<< players[i].score<< std::endl;
+                    break;
+                }
+                else    {
+                    points--;
+                    std::cout << "Answer Incorrect,Remaining attempts: "<< points << std::endl;
+                }   
+            }
+            points=3;
+            it++;
+	    }
+	    std::cout << "Do you want another round(Enter 1 for 'Yes' 0 for 'No'): ";
+	    std::cin >> rounds;
+    }
+
+    leaderboard();
 	//players
 }
 
@@ -164,3 +205,68 @@ bool Cards::verify_input(std::string input)
 		};
 	}
 }
+
+void Cards::leaderboard(){
+    std::cout << "**************************" << std::endl;
+    std::cout << "Leaderboard" << std::endl;
+    std::cout << "**************************" << std::endl;
+
+    std::cout << "Name\tScore" << std::endl;
+    for (int i = 0; i < players.size(); i++) {
+        std::cout << players[i].name<< "\t "<< players[i].score<< std::endl;
+    }
+}
+
+
+void Cards::addPlayers()
+{
+    int playersCount;
+    
+    std::cout << "How many players: ";
+    std::cin >> playersCount;
+    player p1;
+    p1.score = 0;
+    
+    for(int i =0; i < playersCount; i++){
+        std::cout <<"Enter Player" << (i+1) <<"'s name: ";
+        std::cin >> p1.name;
+        players.push_back(p1);
+    }
+}
+void Cards::playCards()
+{
+   
+   int random;
+   int points =3;
+   std::string answer;
+   
+   //map iterator and game loop
+    std::map<std::string,std::string>::iterator it=Card_map.begin();
+    
+    for(int i =0; i < players.size(); i++){
+        
+        // get players card
+        std:: cout <<players[i].name << "'s Card: ";
+        std::cout << it->second << std::endl;
+        
+        // Get Answer and points
+        while(points > 0)   {
+            std::cout << "Enter Answer: ";
+            std::cin >> answer;
+            
+        //Set answer and points
+            if(answer == it->first){
+                std::cout << "CorrectAnswer!" << std::endl;
+                players[i].score += points;
+                std::cout << "Your Score: "<< players[i].score<< std::endl;
+                break;
+            }
+            else    {
+                points--;
+                std::cout << "Answer Incorrect" << std::endl;
+            }
+        }
+        points=3;
+        it++;
+	}
+}	
