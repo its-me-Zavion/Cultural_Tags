@@ -1,15 +1,9 @@
-this is question 1, a1
-q2, a2
-q3, a3
-q11, a11
-q22, a22
-q33, a33
-q111, a111
-q222, a222
-q333, a333
-q1111, a1111
-q2222, a2222
-q3333, a3333
-q11111, a11111
-q22222, a22222
-q33333, a33333
+OutOfSightOutOfMind,OOSOOM,refers to not being worried about something you can't see
+AnotherDayAnotherDollar,ADAD, old saying about work life and money
+BetterLateThanNever,BLTN, old saying about at least getting the job done
+GreatMindsThinkAlike,GMTA, old saying about being on the same page as someone else
+DontCountYourChickensBeforeTheyHatch,DNCYCBTAH, old saying about not counting of something before it comes
+TheBiggerTheyAreTheHarderTheyFall,TBTATHTF,old saying that the wealthy has more to lose when the fail
+IBroughtYouInThisWorldAndICanTakeYouOut,IBYITWAICTYO, angry mother saying when a child is disrespectful 
+StopAllThatCryingBeforeIGiveYouSomethingToCryAbout,SATCBIGYSTCA,Mother saying when a child is crying
+ThisIsAnAAndBConvoSoSeeYoureWayOut,TIAAABCSSYWO, when someone is being nosey in a conversation
