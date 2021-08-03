@@ -3,21 +3,35 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+using namespace std;
 
-template<typename K, typename V>
-void print_map(std::map<K, V> const& m)
+
+string UpperCase(std::string str)
 {
-	for (auto const& pair : m) {
-		std::cout << "{" << pair.first << ": " << pair.second << "}\n";
-	}
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    return str;
+}
+
+//Print map
+void Cards::print_map()
+{
+    std::cout << "{" << std::endl;
+    for (int i = 0; i < Card_map.size(); i++) {
+        std::cout << Card_map[i].question << ":"
+                  <<  Card_map[i].answer << ":" 
+                  << Card_map[i].hint <<std::endl;
+    }
 }
 
 Cards::Cards()
 {
+    // srand(time(NULL));
     update_dictionary("Cultural_tags_dictionary.txt");
 	Menu();
 }
 
+//Print Instructions
 void Cards::instructions()
 {
 	std::cout << "-The objective of this game is to guess what the #CultureTag (acronym) stands for." << std::endl;
@@ -38,52 +52,62 @@ Menu();
 void Cards::playGame()
 {
 	addPlayers();
-	
+	// var for points,answer,rounds
 	int random;
     int points =3;
     std::string answer;
 	bool rounds = true;
+	int cardCount = 0;
 	//map iterator and game loop
-    std::map<std::string,std::string>::iterator it=Card_map.begin();
+    
 	while(rounds){
 
         for(int i =0; i < players.size(); i++){
         
         // get players card
-            std:: cout <<players[i].name << "'s Card: ";
-            std::cout << it->second << std::endl;
-        
+            std:: cout <<std::endl <<players[i].name << " 's Turn"<< std::endl;
+            std:: cout <<"Hint: "<< Card_map[cardCount].hint << std::endl << std::endl;
+            
+            std::cout <<"\t\t"<< Card_map[cardCount].question << std::endl;
         // Get Answer and points
             while(points > 0)   {
                 std::cout << "Enter Answer: ";
-                std::cin >> answer;
-            
+                
+                std::getline(std::cin, answer);
+                answer.erase(remove(answer.begin(), answer.end(), ' '), answer.end());
         //Set answer and points
-                if(answer == it->first){
+                std::string check =UpperCase(Card_map[cardCount].answer);
+                if(UpperCase(answer) == check){
                     std::cout << "CorrectAnswer!" << std::endl;
                     players[i].score += points;
                     std::cout << "Your Score: "<< players[i].score<< std::endl;
                     break;
                 }
                 else    {
+                    //display Incorrect and attempts left
                     points--;
-                    std::cout << "Answer Incorrect,Remaining attempts: "<< points << std::endl;
+                    std::cout << "Answer Incorrect,Remaining attempts: "<< points << std::endl <<std::endl;
                 }   
+                
             }
+            // reset points, new question
+            std::cout << "Answer: " << Card_map[cardCount].answer << std::endl;
             points=3;
-            it++;
+            cardCount++;
 	    }
+	    leaderboard();
 	    std::cout << "Do you want another round(Enter 1 for 'Yes' 0 for 'No'): ";
 	    std::cin >> rounds;
+	    std::cin.ignore();
     }
 
-    leaderboard();
+    displayWinner();
 	//players
 }
 
 void Cards::AddCard()
 {
-	std::string outputfile = " Cultural_tags_dictionary.txt";
+	std::string outputfile = "Cultural_tags_dictionary.txt";
 
 	std::string user_input = "";
 	std::string results = "";
@@ -107,6 +131,16 @@ void Cards::AddCard()
 		}
 	}
 	results += user_input;
+	results += ", ";
+	user_input = "";
+	while (user_input == "") {
+		std::cout << "Insert a new Hint-> ";
+		std::getline(std::cin, user_input);
+		while (!verify_input(user_input)) {
+			user_input = "";
+		}
+	}
+	results += user_input;
 
 
 	//implement write function
@@ -117,7 +151,9 @@ void Cards::AddCard()
 void Cards::Menu()
 {
 	std::string user_input = "";
-	std::string Menu = "\n\t\t\tWelcome to Cultural_tags\n"
+	std::string Menu = "_______________________________________\n"
+	    "\n\tWelcome to Cultural Tags\n"
+	    "_______________________________________\n\n"
 		"Please Select an option:\n"
 		"\tOption 1-> Instructions\n"
 		"\tOption 2-> Play Game\n"
@@ -155,9 +191,10 @@ void Cards::update_dictionary(std::string inputfile)
 {
 	std::ifstream indata; // indata is like cin
 	int num; // variable for input value
-	std::string temp_key;
-	std::string temp_value;
-	char trash = ',';
+	std::string temp_q;
+	std::string temp_a;
+	std::string temp_h;
+	card c1;
 	indata.open(inputfile); // opens the file
 	std::string text_from_file;
 	if (!indata) { // file couldn't be opened
@@ -165,14 +202,19 @@ void Cards::update_dictionary(std::string inputfile)
 		exit(1);
 	}
 	while (getline(indata, text_from_file)) {
+	    
 		std::stringstream ss(text_from_file);
-		getline(ss, temp_key, ',');
-		getline(ss, temp_value, ',');
-		Card_map[temp_key] = temp_value;
+		getline(ss, temp_q, ',');
+		getline(ss, temp_a, ',');
+		getline(ss, temp_h, ',');
+		c1.question = temp_a;
+		c1.answer = temp_q;
+		c1.hint = temp_h;
+		Card_map.push_back(c1);
 	}
 
 	//debug
-	print_map(Card_map);
+	//print_map();
 
 
 }
@@ -207,9 +249,9 @@ bool Cards::verify_input(std::string input)
 }
 
 void Cards::leaderboard(){
-    std::cout << "**************************" << std::endl;
+    std::cout << "__________________________" << std::endl;
     std::cout << "Leaderboard" << std::endl;
-    std::cout << "**************************" << std::endl;
+    std::cout << "__________________________" << std::endl;
 
     std::cout << "Name\tScore" << std::endl;
     for (int i = 0; i < players.size(); i++) {
@@ -217,6 +259,21 @@ void Cards::leaderboard(){
     }
 }
 
+ void Cards::displayWinner(){
+    int max= players[0].score;
+    std:: string maxString=players[0].name;
+    
+    for (int i = 1; i < players.size(); i++) {
+        if (players[i].score > max){
+            max = players[i].score;
+            maxString =players[i].name;
+        }
+        else if(players[i].score == max){
+            maxString += " and " + players[i].name;
+        }
+    }
+    std::cout << "\n\nCongraluations, " << maxString << " has won the game" << std::endl;
+ }
 
 void Cards::addPlayers()
 {
@@ -228,45 +285,9 @@ void Cards::addPlayers()
     p1.score = 0;
     
     for(int i =0; i < playersCount; i++){
-        std::cout <<"Enter Player" << (i+1) <<"'s name: ";
+        std::cout <<"Enter Player " << (i+1) <<"'s name: ";
         std::cin >> p1.name;
         players.push_back(p1);
     }
+    std::cin.ignore();
 }
-void Cards::playCards()
-{
-   
-   int random;
-   int points =3;
-   std::string answer;
-   
-   //map iterator and game loop
-    std::map<std::string,std::string>::iterator it=Card_map.begin();
-    
-    for(int i =0; i < players.size(); i++){
-        
-        // get players card
-        std:: cout <<players[i].name << "'s Card: ";
-        std::cout << it->second << std::endl;
-        
-        // Get Answer and points
-        while(points > 0)   {
-            std::cout << "Enter Answer: ";
-            std::cin >> answer;
-            
-        //Set answer and points
-            if(answer == it->first){
-                std::cout << "CorrectAnswer!" << std::endl;
-                players[i].score += points;
-                std::cout << "Your Score: "<< players[i].score<< std::endl;
-                break;
-            }
-            else    {
-                points--;
-                std::cout << "Answer Incorrect" << std::endl;
-            }
-        }
-        points=3;
-        it++;
-	}
-}	
