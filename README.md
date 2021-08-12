@@ -1,12 +1,10 @@
 # Cultural_Tags
 OSXOD group project
 
-
-Requirements
 The game should have a menu of functions
+
 Option 1 - Instructions
   - Tell the user the instructions
-  - 
 Option 2 - Play Game
   - Get the players and their names
   - Give the player a card
@@ -16,7 +14,6 @@ Option 2 - Play Game
   - End of round
       - show the leaderboard and current leader
       - ask if the players want to play another round
-      -
 Option 3 - Add New Cards
   - User should be able to add a new card.  
   - Confirm the user’s input and show the last 3 cards.
