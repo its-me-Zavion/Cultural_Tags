@@ -1,5 +1,4 @@
 # Cultural_Tags
-OSXOD group project
 
 The game should have a menu of functions
 
