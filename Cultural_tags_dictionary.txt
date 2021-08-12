@@ -7,3 +7,4 @@ TheBiggerTheyAreTheHarderTheyFall,TBTATHTF,old saying that the wealthy has more 
 IBroughtYouInThisWorldAndICanTakeYouOut,IBYITWAICTYO, angry mother saying when a child is disrespectful 
 StopAllThatCryingBeforeIGiveYouSomethingToCryAbout,SATCBIGYSTCA,Mother saying when a child is crying
 ThisIsAnAAndBConvoSoSeeYoureWayOut,TIAAABCSSYWO, when someone is being nosey in a conversation
+HelloHowAreYou,HHAY, this is a common greeting
