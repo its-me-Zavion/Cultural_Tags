@@ -7,11 +7,7 @@
 using namespace std;
 
 
-string UpperCase(std::string str)
-{
-    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-    return str;
-}
+
 
 //Print map
 void Cards::print_map()
@@ -52,21 +48,28 @@ bool Cards::verify_input(std::string input)
 	}
 }
 
+string UpperCase(std::string str)
+{
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    return str;
+}
+
 //Print Instructions
 void Cards::instructions()
 {
 	std::cout << "-The objective of this game is to guess what the #CultureTag (acronym) stands for." << std::endl;
 	std::cout << "\nWhen you select \"2) Play Game\" the game will start as follows:" << std::endl;
 	std::cout << "   1. The program will you ask for the number of players. Enter how many players." << std::endl;
-    std::cout << "   2. The program will then prompt you to enter names for each player." << std::endl;
-    std::cout << "   3. The game will start by giving a card to the first player and taking their answer." << std::endl;
-    std::cout << "   4. The player will be rewarded 3 points for a correct answer." << std::endl;
-    std::cout << "   5. For incorrect answers, the player will lose one point and be able to try again." << std::endl;
-    std::cout << "   6. The leaderboard will be shown after answer is confirmed, and the game will move"
+	std::cout << "   2. The program will then prompt you to enter names for each player." << std::endl;
+    	std::cout << "   3. The game will start by giving a card to the first player and taking their answer." << std::endl;
+    	std::cout << "   4. The player will be rewarded 3 points for a correct answer." << std::endl;
+    	std::cout << "   5. For incorrect answers, the player will lose one point and be able to try again." << std::endl;
+    	std::cout << "   6. The leaderboard will be shown after answer is confirmed, and the game will move"
               << "\n\ton to the next player and next question." << std::endl;
-    std::cout << "   7. After everyone has had a turn, the game will show the current leader and ask if" 
+    	std::cout << "   7. After everyone has had a turn, the game will show the current leader and ask if" 
               << "\n\tthe players want another round." << std::endl;
-    std::cout << "   8. If players decline to play another round, the game will display the leader has won the game.\n" << std::endl;
+    	std::cout << "   8. If players decline to play another round," 
+		  << "the game will display the leader has won the game.\n" << std::endl;
 Menu();
 }
 
