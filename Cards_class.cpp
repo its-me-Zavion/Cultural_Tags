@@ -162,9 +162,6 @@ void Cards::AddCard()
 		}
 	}
 	results += user_input;
-
-
-	//implement write function
 	add_to_dictionary(outputfile, results);
 	Menu();
 }
