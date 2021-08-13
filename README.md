@@ -1,4 +1,4 @@
-# Cultural_Tags
+# Cultural_Tags Requirements
 
 The game should have a menu of functions
 
