@@ -75,19 +75,19 @@ Menu();
 
 void Cards::playGame()
 {
-	addPlayers();
-	// var for points,answer,rounds
-	int random;
+    addPlayers();
+    // var for points,answer,rounds
+    int random;
     int points =3;
     std::string answer;
-	bool rounds = true;
-	int cardCount = 0;
-	//map iterator and game loop
-    
-	while(rounds){
+    bool rounds = true;
+    int cardCount = 0;
+	
+    //map iterator and game loop
+    while(rounds){
 
         for(int i =0; i < players.size(); i++){
-        
+      
         // get players card
             std:: cout <<std::endl <<players[i].name << " 's Turn"<< std::endl;
             std:: cout <<"Hint: "<< Card_map[cardCount].hint << std::endl << std::endl;
