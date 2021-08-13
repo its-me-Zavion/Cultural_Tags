@@ -244,9 +244,6 @@ void Cards::add_to_dictionary(std::string outputfile, std::string input)
 	foutput << std::endl << input;
 	foutput.close();
 }
-
-
-
 void Cards::leaderboard(){
     std::cout << "__________________________" << std::endl;
     std::cout << "Leaderboard" << std::endl;
@@ -257,7 +254,6 @@ void Cards::leaderboard(){
         std::cout << players[i].name<< "\t "<< players[i].score<< std::endl;
     }
 }
-
  void Cards::displayWinner(){
     int max= players[0].score;
     std:: string maxString=players[0].name;
@@ -274,8 +270,7 @@ void Cards::leaderboard(){
     std::cout << "\n\nCongraluations, " << maxString << " has won the game" << std::endl;
  }
 
-void Cards::addPlayers()
-{
+void Cards::addPlayers() {
     int playersCount;
     
     std::cout << "How many players: ";
